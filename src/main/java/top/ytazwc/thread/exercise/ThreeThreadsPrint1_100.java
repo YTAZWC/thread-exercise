@@ -21,6 +21,8 @@ public class ThreeThreadsPrint1_100 {
     public void printNum(int flag) {
         while (num <= 100) {
             synchronized (lock) {
+                // 此处需要判断 num<=100
+                // 确保不会有线程因为 101 % 3 != flag 而休眠 导致程序无法退出
                 while (num % 3 != flag && num <= 100) {
                     try {
                         // 当前数 不由当前线程打印 让当前线程休眠
